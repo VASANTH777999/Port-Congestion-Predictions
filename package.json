@@ -1,0 +1,23 @@
+{
+  "name": "aiqon",
+  "version": "1.0.0",
+  "description": "Aiqon - Port Congestion & Shipment Delays AI Platform",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "cd frontend && npm run dev",
+    "preview": "cd frontend && npm run preview"
+  },
+  "keywords": [
+    "maritime",
+    "ais",
+    "port-congestion",
+    "shipment-delays",
+    "machine-learning",
+    "xgboost",
+    "fastapi",
+    "react",
+    "nvidia-nemotron"
+  ],
+  "author": "Aiqon Systems",
+  "license": "MIT"
+}

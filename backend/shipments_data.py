@@ -1,0 +1,137 @@
+import datetime
+
+def generate_shipments():
+    now = datetime.datetime.now()
+    
+    shipments = [
+        {
+            "id": "SHP-9021",
+            "vessel_name": "COSCO SHIPPING GEMINI",
+            "mmsi": 477189500,
+            "origin": "Shanghai, China (CNSHA)",
+            "destination_id": "USLAX",
+            "cargo_category": "Consumer Electronics & Tech",
+            "cargo_units": 14200,
+            "cargo_value_usd": 128500000,
+            "eta_scheduled": (now + datetime.timedelta(hours=14)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 65.2,
+            "draft_m": 15.2,
+            "length_m": 400,
+            "status": "Approaching Fairway",
+            "criticality": "High"
+        },
+        {
+            "id": "SHP-8412",
+            "vessel_name": "PACIFIC PIONEER",
+            "mmsi": 367490860,
+            "origin": "Rotterdam, Netherlands (NLRTM)",
+            "destination_id": "USHOU",
+            "cargo_category": "Specialized Industrial Polymers & Catalysts",
+            "cargo_units": 8500,
+            "cargo_value_usd": 64200000,
+            "eta_scheduled": (now + datetime.timedelta(hours=6)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 18.4,
+            "draft_m": 12.8,
+            "length_m": 228,
+            "status": "At Anchorage (Waiting Berth)",
+            "criticality": "Critical"
+        },
+        {
+            "id": "SHP-7749",
+            "vessel_name": "MAERSK MC-KINNEY MOLLER",
+            "mmsi": 219018271,
+            "origin": "Busan, South Korea (KRPUS)",
+            "destination_id": "USNYC",
+            "cargo_category": "Automotive Sub-Assemblies & Lithium Cells",
+            "cargo_units": 18270,
+            "cargo_value_usd": 182000000,
+            "eta_scheduled": (now + datetime.timedelta(hours=22)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 142.0,
+            "draft_m": 16.0,
+            "length_m": 399,
+            "status": "In Transit (Deepwater Approach)",
+            "criticality": "High"
+        },
+        {
+            "id": "SHP-6530",
+            "vessel_name": "CMA CGM ANTOINE",
+            "mmsi": 228065800,
+            "origin": "Antwerp, Belgium (BEANR)",
+            "destination_id": "USSAV",
+            "cargo_category": "Retail Apparel & Home Goods",
+            "cargo_units": 11400,
+            "cargo_value_usd": 48900000,
+            "eta_scheduled": (now + datetime.timedelta(hours=10)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 34.8,
+            "draft_m": 14.1,
+            "length_m": 366,
+            "status": "Approaching Fairway",
+            "criticality": "Medium"
+        },
+        {
+            "id": "SHP-5192",
+            "vessel_name": "MISSISSIPPI ENTERPRISE",
+            "mmsi": 368390140,
+            "origin": "Santos, Brazil (BRSSZ)",
+            "destination_id": "USMSY",
+            "cargo_category": "Bulk Agricultural Soybeans & Grain",
+            "cargo_units": 45000,
+            "cargo_value_usd": 38200000,
+            "eta_scheduled": (now + datetime.timedelta(hours=18)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 52.6,
+            "draft_m": 11.5,
+            "length_m": 225,
+            "status": "At Anchorage (Draft Restricted)",
+            "criticality": "Medium"
+        },
+        {
+            "id": "SHP-4822",
+            "vessel_name": "MSC GULSUN",
+            "mmsi": 353083000,
+            "origin": "Yokohama, Japan (JPYOK)",
+            "destination_id": "USSEA",
+            "cargo_category": "Precision Machine Tools & Robotics",
+            "cargo_units": 16800,
+            "cargo_value_usd": 154000000,
+            "eta_scheduled": (now + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 26.5,
+            "draft_m": 16.5,
+            "length_m": 400,
+            "status": "Pilot Boarding Station",
+            "criticality": "High"
+        },
+        {
+            "id": "SHP-3914",
+            "vessel_name": "CARIBBEAN EXPRESS",
+            "mmsi": 367352250,
+            "origin": "Kingston, Jamaica (JMKIN)",
+            "destination_id": "USMIA",
+            "cargo_category": "Refrigerated Perishables (Produce & Seafood)",
+            "cargo_units": 3800,
+            "cargo_value_usd": 22400000,
+            "eta_scheduled": (now + datetime.timedelta(hours=4)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 12.0,
+            "draft_m": 9.4,
+            "length_m": 180,
+            "status": "Approaching Channel",
+            "criticality": "Critical"
+        },
+        {
+            "id": "SHP-2801",
+            "vessel_name": "VALEMAX TITAN",
+            "mmsi": 366947510,
+            "origin": "Ras Tanura, Saudi Arabia (SARTN)",
+            "destination_id": "USCRP",
+            "cargo_category": "Light Sweet Crude Oil Feedstock",
+            "cargo_units": 310000,
+            "cargo_value_usd": 178000000,
+            "eta_scheduled": (now + datetime.timedelta(hours=15)).strftime("%Y-%m-%d %H:%M UTC"),
+            "distance_nm": 45.0,
+            "draft_m": 21.2,
+            "length_m": 333,
+            "status": "At Anchorage (Lightering Queue)",
+            "criticality": "High"
+        }
+    ]
+    return shipments
+

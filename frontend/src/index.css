@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #030b14;
+    color: #e2e8f0;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #071626;
+}
+::-webkit-scrollbar-thumb {
+  background: #1b528f;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+/* Glassmorphic card styling */
+.glass-panel {
+  background: rgba(7, 22, 38, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(35, 110, 191, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s ease-in-out;
+}
+.glass-panel-hover:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Pulse radar ring animation */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(6, 182, 212, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+  }
+}
+
+.radar-ping {
+  animation: radar-pulse 2s infinite;
+}
+
+/* Leaflet dark styling */
+.leaflet-container {
+  background-color: #030b14 !important;
+  font-family: inherit !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #071626 !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #1b528f !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+}
+
+.leaflet-popup-tip {
+  background: #071626 !important;
+  border: 1px solid #1b528f !important;
+}
+
+/* Leaflet Tooltip Tactical HUD for Vessel Hover */
+.leaflet-tooltip.vessel-tactical-tooltip {
+  background: rgba(3, 11, 20, 0.96) !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(6, 182, 212, 0.65) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 20px rgba(6, 182, 212, 0.35) !important;
+  padding: 0 !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  font-family: inherit !important;
+  max-width: 440px !important;
+  white-space: normal !important;
+  pointer-events: none !important;
+}
+
+.leaflet-tooltip-top.vessel-tactical-tooltip:before,
+.leaflet-tooltip-bottom.vessel-tactical-tooltip:before,
+.leaflet-tooltip-left.vessel-tactical-tooltip:before,
+.leaflet-tooltip-right.vessel-tactical-tooltip:before {
+  display: none !important;
+}
+
+
