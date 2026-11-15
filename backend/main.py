@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
@@ -39,6 +39,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
+router = APIRouter()
+
 # Enable GZip compression for high-speed multi-thousand vessel telemetry streaming
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
@@ -63,7 +65,7 @@ class ChatRequest(BaseModel):
     query: str
     port_id: Optional[str] = "USLAX"
 
-@app.get("/api/health")
+@router.get("/health")
 def health_check():
     return {
         "status": "healthy",
@@ -74,7 +76,7 @@ def health_check():
         "llm_engine": "nvidia/nemotron-3.5-lightning-30b-a3b"
     }
 
-@app.post("/api/debug/client-error")
+@router.post("/debug/client-error")
 async def log_client_error(payload: dict):
     print("\n================== FRONTEND ERROR LOGGED ==================")
     print("CLIENT ERROR:", payload.get("message"))
@@ -83,7 +85,7 @@ async def log_client_error(payload: dict):
     print("===========================================================\n")
     return {"status": "recorded"}
 
-@app.get("/api/dataset/summary")
+@router.get("/dataset/summary")
 def get_dataset_summary():
     ds_info = PORTS_STORE.get("dataset_info", {})
     port_stats = PORTS_STORE.get("port_stats", {})
@@ -133,7 +135,7 @@ def get_dataset_summary():
         }
     }
 
-@app.get("/api/dataset/vessels")
+@router.get("/dataset/vessels")
 def get_dataset_vessels(
     port_id: Optional[str] = None,
     type: Optional[str] = None,
@@ -179,7 +181,7 @@ def get_dataset_vessels(
         "vessels": sliced
     }
 
-@app.get("/api/ports")
+@router.get("/ports")
 def list_ports():
     ports_meta = PORTS_STORE["ports_metadata"]
     port_stats = PORTS_STORE["port_stats"]
@@ -211,7 +213,7 @@ def list_ports():
         })
     return {"ports": summaries}
 
-@app.get("/api/ports/{port_id}")
+@router.get("/ports/{port_id}")
 def get_port_detail(port_id: str):
     port_id = port_id.upper()
     if port_id not in PORTS_STORE["ports_metadata"]:
@@ -229,7 +231,7 @@ def get_port_detail(port_id: str):
         "vessels": vessels
     }
 
-@app.post("/api/predict/port")
+@router.post("/predict/port")
 def predict_port(req: PredictPortRequest):
     port_id = req.port_id.upper()
     if port_id not in PORTS_STORE["ports_metadata"]:
@@ -238,7 +240,7 @@ def predict_port(req: PredictPortRequest):
     result = predict_port_congestion(port_id, req.custom_params)
     return result
 
-@app.post("/api/explain/port")
+@router.post("/explain/port")
 def explain_port(req: ExplainPortRequest):
     port_id = req.port_id.upper()
     if port_id not in PORTS_STORE["ports_metadata"]:
@@ -251,7 +253,7 @@ def explain_port(req: ExplainPortRequest):
     explanation = explain_congestion_with_nemotron(prediction_data)
     return explanation
 
-@app.get("/api/vessels/all-unique")
+@router.get("/vessels/all-unique")
 def get_all_unique_vessels(
     format: str = "compact",
     port_id: Optional[str] = None,
@@ -316,7 +318,7 @@ def get_all_unique_vessels(
         "vessels": paged
     }
 
-@app.get("/api/shipments")
+@router.get("/shipments")
 def get_shipments(
     port_id: Optional[str] = None,
     type: Optional[str] = None,
@@ -374,7 +376,7 @@ def get_shipments(
         }
     }
 
-@app.get("/api/metrics")
+@router.get("/metrics")
 def get_metrics():
     metrics_path = os.path.join(os.path.dirname(__file__), "models", "model_metrics.json")
     if os.path.exists(metrics_path):
@@ -382,7 +384,7 @@ def get_metrics():
             return json.load(f)
     return MODEL_METRICS
 
-@app.post("/api/metrics/evaluate")
+@router.post("/metrics/evaluate")
 def run_evaluation_benchmark():
     metrics_path = os.path.join(os.path.dirname(__file__), "models", "model_metrics.json")
     if os.path.exists(metrics_path):
@@ -393,10 +395,14 @@ def run_evaluation_benchmark():
             return data
     return MODEL_METRICS
 
-@app.post("/api/chat")
+@router.post("/chat")
 def copilot_chat(req: ChatRequest):
     resp = ask_maritime_copilot(req.query, req.port_id or "USLAX")
     return resp
+
+# Dual-mount router: supports both `/api/...` and `/...` identically
+app.include_router(router, prefix="/api")
+app.include_router(router)
 
 if __name__ == "__main__":
     import uvicorn

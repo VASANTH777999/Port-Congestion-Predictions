@@ -17,3 +17,4 @@ The production-ready extracts and models are fully pre-compiled and tracked in t
 4. `backend/models/*.json` - Pre-trained, serialized XGBoost classifiers and regressors.
 
 When running locally with `Run.bat`, place `ais-2026-06-04.csv` in this folder to allow offline retraining via `backend/ingest_and_train_ais.py` if desired.
+

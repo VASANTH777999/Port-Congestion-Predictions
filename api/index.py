@@ -13,3 +13,4 @@ for directory in [BACKEND_DIR, ROOT_DIR, API_DIR]:
 
 # Import the FastAPI application from backend/main.py
 from main import app
+

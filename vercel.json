@@ -6,7 +6,8 @@
     "api/*.py": {
       "memory": 1024,
       "maxDuration": 30,
-      "includeFiles": "backend/**"
+      "includeFiles": "backend/**",
+      "excludeFiles": "{frontend,docs,AIS Vessel Data,*.md,*.pdf,generate_report_pdf.py,Run.bat,run.py}/**"
     }
   },
   "rewrites": [
@@ -15,7 +16,7 @@
       "destination": "/api/index.py"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]

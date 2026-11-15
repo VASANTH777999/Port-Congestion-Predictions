@@ -19,3 +19,4 @@ export function apiUrl(endpoint) {
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   return `${API_BASE}${cleanEndpoint}`;
 }
+
